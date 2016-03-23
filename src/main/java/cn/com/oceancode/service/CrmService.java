@@ -4058,7 +4058,7 @@ public class CrmService {
 			List<Map<String, Object>> queryForList = template
 					.queryForList(
 							"select b.* from crm_log_mx b, crm_log a where a.lid = b.lid\n" + "and yxdx = :zh\n"
-									+ "and fwm = 'cn.com.crc.base.service.QuartzJobXj$1'\n" + "order by sxsj desc;",
+									+ "and fwm = 'cn.com.oceancode.service.QuartzJobXj$1'\n" + "order by sxsj desc;",
 							args);
 			for (Map<String, Object> map : queryForList) {
 				String string = map.get("sxsj").toString();
@@ -4144,7 +4144,7 @@ public class CrmService {
 			args.put("zh", userId);
 			List<Map<String, Object>> queryForList = template
 					.queryForList("select b.* from crm_log_mx b, crm_log a where a.lid = b.lid\n" + "and yxdx = :zh\n"
-							+ "and fwm = 'cn.com.crc.base.service.QuartzJobRj_gljt$1'\n" + "order by sxsj desc;", args);
+							+ "and fwm = 'cn.com.oceancode.service.QuartzJobRj_gljt$1'\n" + "order by sxsj desc;", args);
 			for (Map<String, Object> map : queryForList) {
 				String string = map.get("sxsj").toString();
 				map.put("sxsj", sjFormate19(string));
@@ -4965,7 +4965,7 @@ public class CrmService {
 		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
 		Map<String, Object> args = new HashMap<String, Object>();
 		List<Map<String, Object>> list = template.queryForList(
-				"select bz from crm_log where zt= '1' and fwm = 'cn.com.crc.base.service.QuartzJobXj$1' order by bz  desc limit 1",
+				"select bz from crm_log where zt= '1' and fwm = 'cn.com.oceancode.service.QuartzJobXj$1' order by bz  desc limit 1",
 				args);
 		String sj = null;
 		String now = LogUtils.getNowTime();

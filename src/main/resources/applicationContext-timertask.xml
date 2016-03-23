@@ -15,17 +15,17 @@
 	<description>Spring公共配置文件</description>
 
 	<!-- 工作的bean -->
-<!-- 	<bean id="rjJob" class="cn.com.crc.base.service.QuartzJobRj"> -->
+<!-- 	<bean id="rjJob" class="cn.com.oceancode.service.QuartzJobRj"> -->
 <!-- 		<property name="jdbcTemplate" ref="jdbcTemplate_pg" /> -->
 <!-- 		<property name="transactionManager" ref="transactionManager" /> -->
 <!-- 		<property name="transactionTemplate" ref="sharedTransactionTemplate" /> -->
 <!-- 	</bean> -->
-<!-- 	<bean id="rjGljtJob" class="cn.com.crc.base.service.QuartzJobRj_gljt"> -->
+<!-- 	<bean id="rjGljtJob" class="cn.com.oceancode.service.QuartzJobRj_gljt"> -->
 <!-- 		<property name="jdbcTemplate" ref="jdbcTemplate_pg" /> -->
 <!-- 		<property name="transactionManager" ref="transactionManager" /> -->
 <!-- 		<property name="transactionTemplate" ref="sharedTransactionTemplate" /> -->
 <!-- 	</bean> -->
-<!-- 	<bean id="xjJob" class="cn.com.crc.base.service.QuartzJobXj"> -->
+<!-- 	<bean id="xjJob" class="cn.com.oceancode.service.QuartzJobXj"> -->
 <!-- 		<property name="jdbcTemplate" ref="jdbcTemplate_pg" /> -->
 <!-- 		<property name="transactionManager" ref="transactionManager" /> -->
 <!-- 		<property name="transactionTemplate" ref="sharedTransactionTemplate" /> -->

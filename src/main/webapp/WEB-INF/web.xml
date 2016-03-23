@@ -27,7 +27,7 @@
 		<filter-name>ActionFilter</filter-name>
 		<display-name>ActionFilter</display-name>
 		<description></description>
-		<filter-class>cn.com.crc.base.service.ActionFilter</filter-class>
+		<filter-class>cn.com.oceancode.service.ActionFilter</filter-class>
 	</filter>
 
 	<welcome-file-list>
@@ -52,7 +52,7 @@
 		<init-param>
 			<param-name>com.sun.jersey.config.property.packages</param-name>
 			<!--服务类所在的文件夹 -->
-			<param-value>cn.com.crc.base.service</param-value>
+			<param-value>cn.com.oceancode.service</param-value>
 		</init-param>
 		<init-param>
 			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
@@ -63,7 +63,7 @@
 		<servlet-name>Login</servlet-name>
 		<display-name>Login</display-name>
 		<description></description>
-		<servlet-class>cn.com.crc.base.service.Login</servlet-class>
+		<servlet-class>cn.com.oceancode.service.Login</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>JerseyServlet</servlet-name>
