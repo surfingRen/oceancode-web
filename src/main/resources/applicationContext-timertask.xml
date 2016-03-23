@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd"
+	default-lazy-init="true" default-autowire="byName">
+	<description>Spring公共配置文件</description>
+
+	<!-- 工作的bean -->
+<!-- 	<bean id="rjJob" class="cn.com.crc.base.service.QuartzJobRj"> -->
+<!-- 		<property name="jdbcTemplate" ref="jdbcTemplate_pg" /> -->
+<!-- 		<property name="transactionManager" ref="transactionManager" /> -->
+<!-- 		<property name="transactionTemplate" ref="sharedTransactionTemplate" /> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="rjGljtJob" class="cn.com.crc.base.service.QuartzJobRj_gljt"> -->
+<!-- 		<property name="jdbcTemplate" ref="jdbcTemplate_pg" /> -->
+<!-- 		<property name="transactionManager" ref="transactionManager" /> -->
+<!-- 		<property name="transactionTemplate" ref="sharedTransactionTemplate" /> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="xjJob" class="cn.com.crc.base.service.QuartzJobXj"> -->
+<!-- 		<property name="jdbcTemplate" ref="jdbcTemplate_pg" /> -->
+<!-- 		<property name="transactionManager" ref="transactionManager" /> -->
+<!-- 		<property name="transactionTemplate" ref="sharedTransactionTemplate" /> -->
+<!-- 	</bean> -->
+
+	<!-- job的配置开始 -->
+<!-- 	<bean id="rjJobDetail" -->
+<!-- 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> -->
+<!-- 		<property name="targetObject"> -->
+<!-- 			<ref bean="rjJob" /> -->
+<!-- 		</property> -->
+<!-- 		<property name="targetMethod"> -->
+<!-- 			<value>work</value> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="rjGljtJobDetail" -->
+<!-- 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> -->
+<!-- 		<property name="targetObject"> -->
+<!-- 			<ref bean="rjGljtJob" /> -->
+<!-- 		</property> -->
+<!-- 		<property name="targetMethod"> -->
+<!-- 			<value>work</value> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="xjJobDetail" -->
+<!-- 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> -->
+<!-- 		<property name="targetObject"> -->
+<!-- 			<ref bean="xjJob" /> -->
+<!-- 		</property> -->
+<!-- 		<property name="targetMethod"> -->
+<!-- 			<value>work</value> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	<!-- job的配置结束 -->
+
+
+	<!-- 调度的配置开始 -->
+<!-- 	<bean id="cronJobTrigger_rj" -->
+<!-- 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"> -->
+<!-- 		<property name="jobDetail"> -->
+<!-- 			<ref bean="rjJobDetail" /> -->
+<!-- 		</property> -->
+<!-- 		<property name="cronExpression"> -->
+<!-- 			<value>0 0 1 */1 * ?</value>  Cron表达式“10 */1 * * * ?”意为：从10秒开始，每1分钟执行一次。 -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="cronJobTrigger_rj_gljt" -->
+<!-- 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"> -->
+<!-- 		<property name="jobDetail"> -->
+<!-- 			<ref bean="rjGljtJobDetail" /> -->
+<!-- 		</property> -->
+<!-- 		<property name="cronExpression"> -->
+<!-- 			<value>0 2 1 */1 * ?</value>  Cron表达式“10 */1 * * * ?”意为：从10秒开始，每1分钟执行一次。 -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="cronJobTrigger_xj" -->
+<!-- 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"> -->
+<!-- 		<property name="jobDetail"> -->
+<!-- 			<ref bean="xjJobDetail" /> -->
+<!-- 		</property> -->
+<!-- 		<property name="cronExpression"> -->
+<!-- 			<value>0 5 1 5/10 12 ? 2016</value>  Cron表达式“10 */1 * * * ?”意为：从10秒开始，每1分钟执行一次。 -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	<!-- 调度的配置结束 -->
+
+	<!-- 启动触发器的配置开始 -->
+<!-- 	<bean name="startQuertz" lazy-init="true" autowire="no" -->
+<!-- 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean"> -->
+<!-- 		<property name="triggers"> -->
+<!-- 			<list> -->
+<!-- 				<ref bean="cronJobTrigger_rj" /> -->
+<!-- 				<ref bean="cronJobTrigger_rj_gljt" /> -->
+<!-- 				<ref bean="cronJobTrigger_xj" /> -->
+<!-- 				<ref bean="cronJobTrigger_clearDryj" /> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	<!-- 启动触发器的配置结束 -->
+</beans>
