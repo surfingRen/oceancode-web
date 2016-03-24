@@ -16,17 +16,17 @@
 
 	<!-- 工作的bean -->
 <!-- 	<bean id="rjJob" class="cn.com.oceancode.service.QuartzJobRj"> -->
-<!-- 		<property name="jdbcTemplate" ref="jdbcTemplate_pg" /> -->
+<!-- 		<property name="jdbcTemplate" ref="jdbcTemplate_mysql" /> -->
 <!-- 		<property name="transactionManager" ref="transactionManager" /> -->
 <!-- 		<property name="transactionTemplate" ref="sharedTransactionTemplate" /> -->
 <!-- 	</bean> -->
 <!-- 	<bean id="rjGljtJob" class="cn.com.oceancode.service.QuartzJobRj_gljt"> -->
-<!-- 		<property name="jdbcTemplate" ref="jdbcTemplate_pg" /> -->
+<!-- 		<property name="jdbcTemplate" ref="jdbcTemplate_mysql" /> -->
 <!-- 		<property name="transactionManager" ref="transactionManager" /> -->
 <!-- 		<property name="transactionTemplate" ref="sharedTransactionTemplate" /> -->
 <!-- 	</bean> -->
 <!-- 	<bean id="xjJob" class="cn.com.oceancode.service.QuartzJobXj"> -->
-<!-- 		<property name="jdbcTemplate" ref="jdbcTemplate_pg" /> -->
+<!-- 		<property name="jdbcTemplate" ref="jdbcTemplate_mysql" /> -->
 <!-- 		<property name="transactionManager" ref="transactionManager" /> -->
 <!-- 		<property name="transactionTemplate" ref="sharedTransactionTemplate" /> -->
 <!-- 	</bean> -->

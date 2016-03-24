@@ -23,10 +23,10 @@ public class CodeUtils {
 
 	public static String reload() {
 		m = new HashMap<String, Object>();
-		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_pg");
+		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_mysql");
 		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
 		Map<String, Object> args = new HashMap<String, Object>();
-		List<Map<String, Object>> list = template.queryForList("select type||key as key , value from crm_code ", args);
+		List<Map<String, Object>> list = template.queryForList("select ctype||ckey as \"key\" , value from t_code ", args);
 		for (Map<String, Object> map : list) {
 			m.put((String) map.get("key"), map.get("value"));
 		}

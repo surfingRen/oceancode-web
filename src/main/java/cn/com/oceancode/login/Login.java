@@ -31,6 +31,12 @@ public class Login extends HttpServlet {
 	private static final Logger logger = Logger.getLogger(Login.class);
 
 	private static final long serialVersionUID = 1L;
+	
+	private JdbcTemplate jdbcTemplate;
+	
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -105,7 +111,7 @@ public class Login extends HttpServlet {
 		}
 		String txtCode = request.getParameter("txtCode");
 		if (txtCode != null && txtCode.equalsIgnoreCase((String) request.getSession().getAttribute("CheckCode"))) {
-			JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_pg");
+//			JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_mysql");
 			NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
 			Map<String, Object> args = new HashMap<String, Object>();
 			args.put("mm1", txtPwd);

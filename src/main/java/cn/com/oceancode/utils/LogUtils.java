@@ -42,14 +42,14 @@ public class LogUtils {
 
 	public static long getLogId() {
 		Map<String, Object> args = new HashMap<String, Object>();
-		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_pg");
+		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_mysql");
 		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
 		return template.queryForLong("select nextval('crm_log_lid_seq')", args);
 	}
 
 	public static int writeLog(long lid, String fwm, String ffm, String kssj, String jssj, String zt, String bz, String n1, String n2,
 			String n3, String n4, String n5, String n6, String n7, String n8, String exception, String czr) {
-		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_pg");
+		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_mysql");
 		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("lid", lid);
@@ -76,7 +76,7 @@ public class LogUtils {
 
 	public static int writeLogDetail(long lid, String czlx, String czzlx, String yxdx, String yxxm, String yxsl, String sxsj, String n1,
 			String n2, String n3, String n4, String n5, String n6, String n7, String n8) {
-		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_pg");
+		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_mysql");
 		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("lid", lid);
@@ -152,7 +152,7 @@ public class LogUtils {
 	}
 
 	public static int roolBack(Integer logId) {
-		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_pg");
+		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_mysql");
 		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
 		Map<String, Object> args = new HashMap<String, Object>();
 		return template.update("", args);
