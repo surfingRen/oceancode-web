@@ -44,7 +44,7 @@ public class LogUtils {
 		Map<String, Object> args = new HashMap<String, Object>();
 		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_mysql");
 		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
-		return template.queryForLong("select nextval('crm_log_lid_seq')", args);
+		return template.queryForLong("select nextval('t_log_lid_seq')", args);
 	}
 
 	public static int writeLog(long lid, String fwm, String ffm, String kssj, String jssj, String zt, String bz, String n1, String n2,
@@ -70,7 +70,7 @@ public class LogUtils {
 		args.put("n8", n8);
 		args.put("czr", czr);
 		return template
-				.update("INSERT INTO crm_log(lid, fwm, ffm, kssj, jssj, zt, exception, bz, n1, n2, n3, n4, n5, n6, n7, n8,czr) VALUES (:lid, :fwm, :ffm, :kssj, :jssj, :zt, :exception, :bz, :n1, :n2, :n3, :n4, :n5, :n6, :n7, :n8, :czr)",
+				.update("INSERT INTO t_log(lid, fwm, ffm, kssj, jssj, zt, exception, bz, n1, n2, n3, n4, n5, n6, n7, n8,czr) VALUES (:lid, :fwm, :ffm, :kssj, :jssj, :zt, :exception, :bz, :n1, :n2, :n3, :n4, :n5, :n6, :n7, :n8, :czr)",
 						args);
 	}
 
@@ -95,7 +95,7 @@ public class LogUtils {
 		args.put("n7", n7);
 		args.put("n8", n8);
 		return template
-				.update("INSERT INTO crm_log_mx(lid, czlx, czzlx, yxdx, yxxm, yxsl, sxsj, n1, n2, n3, n4, n5, n6, n7, n8) VALUES (:lid, :czlx, :czzlx, :yxdx, :yxxm, :yxsl, :sxsj, :n1, :n2, :n3, :n4, :n5, :n6, :n7, :n8)",
+				.update("INSERT INTO t_log_mx(lid, czlx, czzlx, yxdx, yxxm, yxsl, sxsj, n1, n2, n3, n4, n5, n6, n7, n8) VALUES (:lid, :czlx, :czzlx, :yxdx, :yxxm, :yxsl, :sxsj, :n1, :n2, :n3, :n4, :n5, :n6, :n7, :n8)",
 						args);
 	}
 
@@ -149,13 +149,6 @@ public class LogUtils {
 			String n2, String czr) {
 		return writeLog(lid, fwm, ffm, kssj, jssj, "0", bz.substring(0, (bz.length() > 4000 ? 4000 : bz.length())), n1, n2, null, null,
 				null, null, null, null, exception.substring(0, (exception.length() > 4000 ? 4000 : exception.length())), czr);
-	}
-
-	public static int roolBack(Integer logId) {
-		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_mysql");
-		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
-		Map<String, Object> args = new HashMap<String, Object>();
-		return template.update("", args);
 	}
 
 	public static String getUserId(HttpServletRequest request) {

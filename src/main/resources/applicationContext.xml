@@ -37,6 +37,15 @@
 		<property name="password">
 			<value>Passw0rd</value>
 		</property>
+<!-- 		<property name="url"> -->
+<!-- 			<value>jdbc:mysql://10.211.55.2:8066/TESTDB</value> -->
+<!-- 		</property> -->
+<!-- 		<property name="username"> -->
+<!-- 			<value>test</value> -->
+<!-- 		</property> -->
+<!-- 		<property name="password"> -->
+<!-- 			<value>test</value> -->
+<!-- 		</property> -->
 		<!-- 最大连接数量 -->
 		<property name="maxActive" value="20" />
 		<!-- 初始化连接 -->

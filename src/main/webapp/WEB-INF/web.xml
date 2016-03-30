@@ -27,11 +27,11 @@
 		<filter-name>ActionFilter</filter-name>
 		<display-name>ActionFilter</display-name>
 		<description></description>
-		<filter-class>cn.com.oceancode.service.ActionFilter</filter-class>
+		<filter-class>cn.com.oceancode.filter.ActionFilter</filter-class>
 	</filter>
 
 	<welcome-file-list>
-		<welcome-file>welcome.html</welcome-file>
+		<welcome-file>login.html</welcome-file>
 	</welcome-file-list>
 	<filter-mapping>
 		<filter-name>ActionFilter</filter-name>
@@ -63,7 +63,7 @@
 		<servlet-name>Login</servlet-name>
 		<display-name>Login</display-name>
 		<description></description>
-		<servlet-class>cn.com.oceancode.service.Login</servlet-class>
+		<servlet-class>cn.com.oceancode.login.Login</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>JerseyServlet</servlet-name>

@@ -26,7 +26,7 @@ public class CodeUtils {
 		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_mysql");
 		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
 		Map<String, Object> args = new HashMap<String, Object>();
-		List<Map<String, Object>> list = template.queryForList("select ctype||ckey as \"key\" , value from t_code ", args);
+		List<Map<String, Object>> list = template.queryForList("select concat(ctype,ckey) as \"key\" , value from t_code ", args);
 		for (Map<String, Object> map : list) {
 			m.put((String) map.get("key"), map.get("value"));
 		}

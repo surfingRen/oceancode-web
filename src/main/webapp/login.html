@@ -1,0 +1,83 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta name="renderer" content="webkit|ie-comp|ie-stand" />
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate" />
+<title>OceanCODE | 登录</title>
+<style>
+body {font-family: 微软雅黑 }
+li {list-style-type: none; height: 50px; position: relative;}
+.left {position: absolute; eft: 2px; line-height: 40px;}
+li input {position: absolute; left: 67px; width: 202px;	height: 30px;}
+#Text3 {width: 140px;}
+#ImageButton1 {	width: 200px; height: 28px;	border-radius: 5px; font-family: 微软雅黑; cursor: pointer;}
+</style>
+</head>
+<body
+	style="text-align: center; margin: 0px; background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(88, 189, 175)), to(rgb(208, 187, 69)));">
+	<img id="myBg" style="left: 0px; top: 0px; margin-top: 0px;" src="images/loginBg06.jpg" />
+	<div id="myLogin"
+		style="margin: auto; width: 350px; margin-top: -300px; background: #C9D7D2; height: 265px; border: 1px soild; border-radius: 5px; padding: 20px; opacity: 0.85; filter: alpha(opacity = 85)">
+		<h3 style="margin: 6px; padding: 0px; text-align: center;">OceanCODE | 登录</h3>
+		<form name="form1" method="post" action="Login" id="form1">
+			<input type="hidden" name="ip" />
+			<ul class="login" style="margin-bottom: 5px;">
+				<li><span class="left">用户名：</span><input id="Text1" type="text" class="txt" name="txtUid" value=""
+					autocomplete="off" /></li>
+				<li><span class="left">密 码：</span><input id="Text2" class="txt" name="txtPwd" type="password" value=""
+					autocomplete="off" /></li>
+				<li><span class="left">验证码：</span> <input name='txtCode' id="Text3" type="text" class="txtCode" /> <span
+					style="position: absolute; right: 97px; top: 12px;"> <img
+						style="top: -5px; position: absolute; cursor: pointer;" src="rs/test/getCheckCodeImage"
+						onclick="this.src='rs/test/getCheckCodeImage?p='+parseInt(1000*Math.random());"></span></li>
+			</ul>
+			<div id="msg" style="color: red; padding-left: 81px;">
+				<script>function getQueryStr(str){
+					    var url=location.href;
+					    var rs = new RegExp("(^|)"+str+"=([^\&]*)(\&|$)","gi").exec(url), tmp;
+					    if(tmp=rs){
+					        return tmp[2];
+					    }
+					    return "";
+						}	
+					if(getQueryStr('msg')=='1')document.write('用户名或密码不正确');
+					if(getQueryStr('msg')=='2')document.write('验证码不正确');
+					if(getQueryStr('msg')=='3')document.write('您的账号还未激活');
+					if(getQueryStr('msg')=='4')document.write('账户已锁定，请联系管理员');
+					</script>
+			</div>
+			<input type="submit" name="ImageButton1" id="ImageButton1" value="登 录" />
+		</form>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<script>
+function parseUrl(){
+    var url=location.href;
+    var i=url.indexOf('?');
+    if(i==-1)return;
+    var querystr=url.substr(i+1);
+    var arr1=querystr.split('&');
+    var arr2=new Object();
+    for  (i in arr1){
+        var ta=arr1[i].split('=');
+        arr2[ta[0]]=ta[1];
+    }
+    return arr2;
+}
+$(function(){
+if(returnCitySN)
+document.getElementsByName('ip')[0].value = encodeURIComponent(returnCitySN["cip"]+','+returnCitySN["cname"]);
+else
+document.getElementsByName('ip')[0].value = '-,http://pv.sohu.com/cityjson?ie=utf-8';
+$('#myBg').css('width',$(window).width());
+$('#myLogin').css('margin-top',-($(window).width()*0.44<265?$(window).width()*0.44:(265+($(window).width()*0.44 - 265) /2)));
+});
+window.onresize=function(){
+	$('#myBg').css('width',$(window).width());	
+	$('#myLogin').css('margin-top',-($(window).width()*0.44<265?$(window).width()*0.44:(265+($(window).width()*0.44 - 265) /2)));
+}
+</script>
