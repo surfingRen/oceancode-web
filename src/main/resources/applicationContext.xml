@@ -35,7 +35,7 @@
 			<value>root</value>
 		</property>
 		<property name="password">
-			<value></value>
+			<value>admin</value>
 		</property>
 <!-- 		<property name="url"> -->
 <!-- 			<value>jdbc:mysql://10.211.55.2:8066/TESTDB</value> -->
