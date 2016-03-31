@@ -111,7 +111,7 @@ public class DBInit {
 				catMap = new HashMap<String, Object>();
 				catMap.put("text", cat);
 				catMap.put("shop_id", shop_id);
-				template.update("INSERT INTO t_stuff_cat (id,text,shop_id) " + "VALUES (next value for MYCATSEQ_GLOBAL,:text,:shop_id)", catMap);
+				template.update("INSERT INTO t_stuff_cat (id,text,shop_id) " + "VALUES (null,:text,:shop_id)", catMap);
 				int staff_cat_id = template.queryForInt(
 						"select id from t_stuff_cat where text = :text and shop_id = :shop_id limit 1", catMap);
 
@@ -167,7 +167,7 @@ public class DBInit {
 //					System.out.println(staff);
 					template.update(
 							"INSERT INTO t_stuff (id,cat_id ,shop_id,name, money2, id3 , note, photos, sales_count,recommend) "
-									+ "VALUES (next value for MYCATSEQ_GLOBAL,:cat_id,:shop_id,:name, :money2, :id3 , :note, :photos,:sales_count,:recommend)",
+									+ "VALUES (null,:cat_id,:shop_id,:name, :money2, :id3 , :note, :photos,:sales_count,:recommend)",
 							staff);
 				}
 				
@@ -261,7 +261,7 @@ public class DBInit {
 			if (i % 1000 == 0) {
 				System.out.println(i + " cost :" + (System.currentTimeMillis() - now));
 			}
-			template.update("INSERT INTO t_user (id, name, phone, email, sex) VALUES (next value for MYCATSEQ_GLOBAL, :name, :phone, :email , :sex)", args);
+			template.update("INSERT INTO t_user (id, name, phone, email, sex) VALUES (null, :name, :phone, :email, :sex)", args);
 		}
 		System.out.println(System.currentTimeMillis() - now);
 	}
@@ -316,8 +316,9 @@ public class DBInit {
 					args.put("source", jsonArray.getJSONObject(i).get("source_name"));
 					template.update(
 							"INSERT INTO t_shop (id,id3,name, phone, email,nickname,address,note,lng,lat,source) "
-									+ "VALUES (next value for MYCATSEQ_GLOBAL,:id3,:name, :phone, :email, :nickname, :address, :note,:lng, :lat, :source)",
+									+ "VALUES (null,:id3,:name, :phone, :email, :nickname, :address, :note,:lng, :lat, :source)",
 							args);
+					// mycat use : next value for MYCATSEQ_GLOBAL
 				}
 			}
 		}
