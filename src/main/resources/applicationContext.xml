@@ -76,14 +76,10 @@
 		<property name="numTestsPerEvictionRun" value="20" />
 	</bean>
 
-	<bean id="crmService" class="cn.com.oceancode.service.CrmService">
+	<bean id="OCService" class="cn.com.oceancode.service.OCService">
 		<property name="jdbcTemplate" ref="jdbcTemplate_mysql" />
 		<property name="transactionManager" ref="transactionManager" />
 		<property name="transactionTemplate" ref="sharedTransactionTemplate" />
-	</bean>
-
-	<bean id="Login" class="cn.com.oceancode.login.Login">
-		<property name="jdbcTemplate" ref="jdbcTemplate_mysql" />
 	</bean>
 
 	<bean id="transactionManager"

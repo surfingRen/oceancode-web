@@ -44,7 +44,7 @@ public class LogUtils {
 		Map<String, Object> args = new HashMap<String, Object>();
 		JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_mysql");
 		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
-		return template.queryForLong("select nextval('t_log_lid_seq')", args);
+		return template.queryForLong("select nextval('seq_log');", args);
 	}
 
 	public static int writeLog(long lid, String fwm, String ffm, String kssj, String jssj, String zt, String bz, String n1, String n2,
@@ -152,7 +152,7 @@ public class LogUtils {
 	}
 
 	public static String getUserId(HttpServletRequest request) {
-		return (String) request.getSession().getAttribute("userId");
+		return request.getSession().getAttribute("userId")+"";
 	}
 
 	public static String getUserId() {
