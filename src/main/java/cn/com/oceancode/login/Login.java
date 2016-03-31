@@ -32,12 +32,6 @@ public class Login extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	private JdbcTemplate jdbcTemplate;
-	
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -76,8 +70,8 @@ public class Login extends HttpServlet {
 		String startTime = LogUtils.getNowTime();
 
 		String ip = URLDecoder.decode(request.getParameter("ip"), "UTF-8");
-		String userId = request.getParameter("txtUid");
-		String txtPwd = request.getParameter("txtPwd");
+		String userId = request.getParameter("username");
+		String txtPwd = request.getParameter("password");
 
 		if ("UJMT5GBVF4REDCDF3GH2JKLIUYT7RE"
 				.equals(((HttpServletRequest) request).getSession().getServletContext().getAttribute("SN"))) {
@@ -110,52 +104,22 @@ public class Login extends HttpServlet {
 			return;
 		}
 		String txtCode = request.getParameter("txtCode");
-		if (txtCode != null && txtCode.equalsIgnoreCase((String) request.getSession().getAttribute("CheckCode"))) {
-//			JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_mysql");
+//		if (txtCode != null && txtCode.equalsIgnoreCase((String) request.getSession().getAttribute("CheckCode"))) {
+			JdbcTemplate jdbcTemplate = (JdbcTemplate) SpringContextUtil.getBean("jdbcTemplate_mysql");
 			NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
 			Map<String, Object> args = new HashMap<String, Object>();
 			args.put("mm1", txtPwd);
 			args.put("zh", userId);
 			List<Map<String, Object>> queryForList = template
-					.queryForList("select * from crm_user where mm1 = :mm1 and zh = :zh", args);
+					.queryForList("select * from t_user where pwd = :mm1 and (email = :zh or phone = :zh)", args);
 			if (queryForList.size() == 1) {
-				if (!queryForList.get(0).get("yxzt").equals("1")) {
-					if (queryForList.get(0).get("yxzt").equals("2")) {
-
-						response.sendRedirect("login.html?msg=4");
-						String msg = "";
-						/**
-						 * 1.获得客户机信息
-						 */
-						msg += ip;// request.getRemoteAddr();// 得到来访者的IP地址
-						// String remoteHost = request.getRemoteHost();
-						String method = request.getMethod();// 得到请求URL地址时使用的方法
-						String localAddr = request.getLocalAddr();// 获取WEB服务器的IP地址
-						String localName = request.getLocalName();// 获取WEB服务器的主机名
-						String userAgent = request.getHeader("USER-AGENT");
-						String userReferer = request.getHeader("Referer");
-						LogUtils.writeLogS(logId, "login2", Thread.currentThread().getStackTrace()[1].getMethodName(), startTime,
-								LogUtils.getNowTime(), msg, LogUtils.getUserId(request),
-								localAddr + "[" + userReferer + "](" + localName + ")", userAgent, method);
-						
-						if (logger.isDebugEnabled()) {
-							logger.debug("doPost(HttpServletRequest, HttpServletResponse) - end");
-						}
-						return;
-					}
-					response.sendRedirect("login.html?msg=3");
-					if (logger.isDebugEnabled()) {
-						logger.debug("doPost(HttpServletRequest, HttpServletResponse) - end");
-					}
-					return;
-				}
-				request.getSession().setAttribute("userId", userId);
+				request.getSession().setAttribute("userId", queryForList.get(0).get("id"));
 				if (logger.isInfoEnabled()) {
-					logger.info("doPost(HttpServletRequest, HttpServletResponse) - start  登录成功！ ~ " + userId);
+					logger.info("doPost(HttpServletRequest, HttpServletResponse) - start  登录成功！ ~ 登录账户:" + userId + " id:" +queryForList.get(0).get("id"));
 				}
-				Cookie cookie = new Cookie("crm_user_login_id", userId);
+				Cookie cookie = new Cookie("oceancode_user_login_id", queryForList.get(0).get("id").toString());
 				response.addCookie(cookie);
-				response.sendRedirect("index.html");
+				response.sendRedirect("starter.html");
 				String msg = "";
 				/**
 				 * 1.获得客户机信息
@@ -181,13 +145,13 @@ public class Login extends HttpServlet {
 				}
 				return;
 			}
-		} else {
-			response.sendRedirect("login.html?msg=2");
-			if (logger.isDebugEnabled()) {
-				logger.debug("doPost(HttpServletRequest, HttpServletResponse) - end");
-			}
-			return;
-		}
+//		} else {
+//			response.sendRedirect("login.html?msg=2");
+//			if (logger.isDebugEnabled()) {
+//				logger.debug("doPost(HttpServletRequest, HttpServletResponse) - end");
+//			}
+//			return;
+//		}
 
 		// response.sendRedirect("/member/index.html");
 

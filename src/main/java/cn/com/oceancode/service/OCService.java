@@ -15,6 +15,7 @@ import javax.ws.rs.core.Context;
 
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -196,10 +197,10 @@ public class OCService {
 						+ request.getQueryString());
 			}
 			Configuration cfg = new Configuration();
-			cfg.setDirectoryForTemplateLoading(new File(request.getSession().getServletContext().getRealPath("")));
+			cfg.setDirectoryForTemplateLoading(new File(request.getSession().getServletContext().getRealPath("oc")));
 			cfg.setDefaultEncoding("UTF-8");
 			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
-			String methodName = "initParam_" + path.substring(0, path.indexOf("."));
+			String methodName = "init_" + path.substring(0, path.indexOf("."));
 			Map<String, Object> root = (Map<String, Object>) this.getClass()
 					.getMethod(methodName, new Class[] { HttpServletRequest.class })
 					.invoke(this, new Object[] { request });
@@ -234,8 +235,42 @@ public class OCService {
 	}
 
 	private String getUserId(HttpServletRequest request) {
-		String returnString = (String) request.getSession().getAttribute("userId");
+		String returnString = "" + request.getSession().getAttribute("userId");
 		return returnString;
+	}
+
+	public Map<String, Object> init_stuffmgr(HttpServletRequest request) {
+
+		Map<String, Object> root = new HashMap<String, Object>();
+		try {
+			Map<String, Object> user = initMe(request);
+			root.put("user", user);
+			// root.put("nav", nav);
+		} catch (Exception e) {
+			return root;
+		}
+
+		return root;
+	}
+
+	private Map<String, Object> initMe(HttpServletRequest request) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("initMe(HttpServletRequest) - start");
+		}
+
+		// 获取 当前用户帐号
+		String userId = getUserId(request);
+
+		// 获取数据库 ， crm_user
+		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
+		Map<String, Object> args = new HashMap<String, Object>();
+		args.put("id", userId);
+		Map<String, Object> user = template.queryForMap("select * from t_user where id = :id", args);
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("initMe(HttpServletRequest) - end");
+		}
+		return user;
 	}
 
 	public static void main(String[] args) {
