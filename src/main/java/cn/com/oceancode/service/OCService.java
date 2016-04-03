@@ -201,9 +201,15 @@ public class OCService {
 			cfg.setDefaultEncoding("UTF-8");
 			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
 			String methodName = "init_" + path.substring(0, path.indexOf("."));
-			Map<String, Object> root = (Map<String, Object>) this.getClass()
-					.getMethod(methodName, new Class[] { HttpServletRequest.class })
-					.invoke(this, new Object[] { request });
+			Map<String, Object> root;
+			try {
+				root = (Map<String, Object>) this.getClass()
+						.getMethod(methodName, new Class[] { HttpServletRequest.class })
+						.invoke(this, new Object[] { request });
+			} catch (Exception e) {
+				logger.warn(e);
+				root = new HashMap<String, Object>();
+			}
 
 			Template temp = cfg.getTemplate(path);
 			StringWriter sw = new StringWriter();
