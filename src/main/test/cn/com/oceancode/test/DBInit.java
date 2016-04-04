@@ -48,12 +48,12 @@ public class DBInit {
 
 	public static void main(String[] args2) throws ClientProtocolException, IOException, JSONException {
 
-		for (int i = 0; i < 10; i++) {
-			Thread t = new Thread(new Work());
-			t.start();
-		}
+//		for (int i = 0; i < 10; i++) {
+//			Thread t = new Thread(new Work());
+//			t.start();
+//		}
 //		 pullShopInfoFromBaiduWaimai();
-//		 pullDetailFromBaiduWaimai();
+		 pullDetailFromBaiduWaimai();
 	}
 
 	public static void pullShopInfoFromBaiduWaimai() {
@@ -71,11 +71,10 @@ public class DBInit {
 	public static void pullDetailFromBaiduWaimai() {
 		try {
 			Map<String, Object> paramMap = new HashMap<String, Object>();
-			String sql = "select * from t_shop order by id limit 1000";
+			String sql = "select id,id3 from t_shop order by id limit 293,1000";
 			List<Map<String, Object>> list = template.queryForList(sql, paramMap);
 			String url = "http://waimai.baidu.com/waimai/shop/";
 			System.out.println(list.size());
-			if(true)return;
 			int i = 0;
 			for (Map<String, Object> map : list) {
 				i += 1;
