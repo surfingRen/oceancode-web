@@ -1,0 +1,95 @@
+<section class="content-header">
+	<h1>
+		店铺二维码管理 <small>配置二维码规则,打印二维码</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#" onclick="return load('admin.index.html')"><i class="fa fa-dashboard"></i> 首页</a></li>
+		<li><a href="#" onclick="return load('admin.menu.html')"><i class="fa fa-shopping-cart"></i> 店铺管理</a></li>
+		<li class="active">二维码管理</li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content">
+	<form id="myform" action="rs/admin/addMenu">
+		<input type="hidden" name="menuId" value="${(id)!''}"/>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title" style="margin-right: 10px;">二维码规则</h3>
+					</div>
+					<div class="box-body">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="menuText">号码前缀</label> <input type="text" class="form-control" id="menuText" name="menuText"
+									value="${(text)!''}">
+							</div>
+							<div class="form-group">
+								<label for="menuPid">号码起</label> <input type="text" class="form-control" id="menuPid" name="menuPid"
+									value="${(pid)!''}">
+							</div>
+							<div class="form-group">
+								<label for="menuNav">号码止</label> <input type="text" class="form-control" id="menuNav" name="menuNav"
+									value="${(nav)!''}">
+							</div>
+							<div class="form-group">
+								<label for="menuNote">跳过号码<small>(多个请用逗号分隔)</small></label> <input type="text" class="form-control" id="menuNote" name="menuNote"
+									value="${(note)!''}">
+							</div>
+							<div class="form-group">
+								<label for="menuUrl">二维码中心图片</label> <input type="text" class="form-control" id="menuUrl" name="menuUrl"
+									value="${(url)!''}">
+							</div>
+							<div class="form-group" style="text-align:right;">
+								<input type="button" class="btn btn-default btnadd" value="添加" />
+							</div>
+						</div>
+						<div class="col-md-6 qrcodepreview">
+						
+						</div>
+					</div>
+					<div class="box-footer">
+						<input type="button" class="btn btn-default btnsubmit" value="提交" /> <input type="button"
+							class="btn btn-default btncancel" value="取消" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>
+<script>
+	$(function() {
+		$('.btnsubmit').on('click', function() {
+			loading();
+			if(document.getElementsByName('menuId')[0].value){
+				$('#myform').attr('action','rs/admin/saveMenu')
+			}
+			$.ajax({
+				url : $('#myform').attr('action'),
+				type : 'POST',
+				cache : false,
+				data : $('#myform').serialize(),
+				success : function(h) {
+					if (h == '{msg:0}') {
+						alert('登录信息超时，请重新登录!');
+						window.location.href = 'login.html';
+						return;
+					}
+					eval(h);
+				}
+			});
+			return false;
+		})
+		
+		$('.btncancel').on('click', function() {
+			load('admin.menu.html');
+		})
+		
+		$('.btnadd').on('click', function() {
+			$('.qrcodepreview').html('<div id="qrcode"></div><div id="qrcode2"></div><div id="qrcode3"></div>');
+// 			$('#qrcode').qrcode({width: 64,height: 64,text: "https://www.hainabo.com",src: 'imgs/login/qq.png'});
+// 			$('#qrcode2').qrcode({width: 64,height: 64,text: "https://10.211.55.2",src: 'imgs/login/qq.png'});
+			$('#qrcode3').qrcode({width: 64,height: 64,text: "https://10.211.55.2/ui.jsp?shopid=294",src: 'imgs/login/qq.png'});
+		})
+	})
+</script>

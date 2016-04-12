@@ -44,8 +44,8 @@ public class OCService {
 
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
-	private JdbcTemplate jdbcTemplate;
-	private PlatformTransactionManager transactionManager;
+	protected static JdbcTemplate jdbcTemplate;
+	protected PlatformTransactionManager transactionManager;
 
 	public PlatformTransactionManager getTransactionManager() {
 		return transactionManager;
@@ -64,22 +64,6 @@ public class OCService {
 
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
-	}
-
-	/**
-	 * 初始化修改资料
-	 * 
-	 * @param request
-	 * @return
-	 */
-	public Map<String, Object> initParam_xgzl(HttpServletRequest request) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("initParam_xgzl(HttpServletRequest) - start");
-		}
-
-		Map<String, Object> root = new HashMap<String, Object>();
-		root.put("user", "sd");
-		return root;
 	}
 
 	@GET
@@ -200,10 +184,13 @@ public class OCService {
 			cfg.setDirectoryForTemplateLoading(new File(request.getSession().getServletContext().getRealPath("oc")));
 			cfg.setDefaultEncoding("UTF-8");
 			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
-			String methodName = "init_" + path.substring(0, path.indexOf("."));
+			String methodName = "init_" + path.substring(path.indexOf(".")+1, path.lastIndexOf("."));
+			String className = path.substring(0, path.indexOf("."));
 			Map<String, Object> root;
 			try {
-				root = (Map<String, Object>) this.getClass()
+				root = (Map<String, Object>) Class
+						.forName("cn.com.oceancode.service." + className.substring(0, 1).toUpperCase()
+								+ className.substring(1).toLowerCase() + "Service")
 						.getMethod(methodName, new Class[] { HttpServletRequest.class })
 						.invoke(this, new Object[] { request });
 			} catch (Exception e) {
@@ -240,7 +227,7 @@ public class OCService {
 		return returnString;
 	}
 
-	private String getUserId(HttpServletRequest request) {
+	private static String getUserId(HttpServletRequest request) {
 		String returnString = "" + request.getSession().getAttribute("userId");
 		return returnString;
 	}
@@ -259,7 +246,7 @@ public class OCService {
 		return root;
 	}
 
-	private Map<String, Object> initMe(HttpServletRequest request) {
+	protected static Map<String, Object> initMe(HttpServletRequest request) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("initMe(HttpServletRequest) - start");
 		}
@@ -282,4 +269,8 @@ public class OCService {
 	public static void main(String[] args) {
 	}
 
+	static String sjFormate19(String string) {
+		return string.length() > 19 ? string.substring(0, 19) : string;
+	}
+	
 }

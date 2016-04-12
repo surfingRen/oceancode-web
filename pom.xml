@@ -220,6 +220,12 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.4</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty</artifactId>
+			<version>3.7.0.Final</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>crm</finalName>

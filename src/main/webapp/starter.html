@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
 <!-- bootstrap datepicker -->
 <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="plugins/iCheck/all.css">
 <!-- Bootstrap Color Picker -->
@@ -95,20 +97,21 @@
 					<li><a href="#" onclick="return load('shop.role.index.html')"><i class="fa fa-user"></i> <span>首页</span></a></li>
 					<li><a href="#" onclick="return load('user.profile.html')"><i class="fa fa-user"></i> <span>个人信息</span></a></li>
 					<li><a href="#" onclick="return load('shop.stuffmgr.html')"><i class="fa fa-bars"></i> <span>商品管理</span></a></li>
-					<li class="treeview"><a href="#" onclick="return load('shop.stuffmgr.html')><i class="fa fa-users"></i> <span>店员店铺</span> <i
+					<li class="treeview"><a href="#" onclick="return load('shop.stuffmgr.html')"><i class="fa fa-users"></i> <span>店员店铺</span> <i
 							class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a href="#" onclick="return load('shop.import.html')><i class="fa fa-at"></i> <span>第三方导入</span></a></li>
-							<li><a href="#" onclick="return load('shop.rolemgr.html')><i class="fa fa-at"></i>角色</a></li>
-							<li><a href="#" onclick="return load('shop.usermgr.html')><i class="fa fa-circle-o"></i>员工</a></li>
+							<li><a href="#" onclick="return load('shop.import.html')"><i class="fa fa-at"></i> <span>第三方导入商品</span></a></li>
+							<li><a href="#" onclick="return load('shop.rolemgr.html')"><i class="fa fa-at"></i>角色管理</a></li>
+							<li><a href="#" onclick="return load('shop.usermgr.html')"><i class="fa fa-circle-o"></i>员工管理</a></li>
+							<li><a href="#" onclick="return load('shop.qrcodemgr.html')"><i class="fa fa-circle-o"></i>二维码管理</a></li>
 						</ul>
 					</li>
-					<li class="treeview"><a href="#" onclick="return load('system.setting.html')><i class="fa fa-users"></i> <span>系统管理</span> <i
+					<li class="treeview"><a href="#" onclick="return load('system.setting.html')"><i class="fa fa-users"></i> <span>系统管理</span> <i
 							class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a href="#" onclick="return load('system.setting.html')><i class="fa fa-at"></i> <span>菜单</span></a></li>
-							<li><a href="#" onclick="return load('system.setting.html')><i class="fa fa-at"></i> <span>代码维护</span></a></li>
-							<li><a href="#" onclick="return load('shop.rolemgr.html')><i class="fa fa-at"></i>缓存刷新</a></li>
+							<li><a href="#" onclick="return load('system.setting.html')"><i class="fa fa-at"></i> <span>菜单</span></a></li>
+							<li><a href="#" onclick="return load('system.setting.html')"><i class="fa fa-at"></i> <span>代码维护</span></a></li>
+							<li><a href="#" onclick="return load('shop.rolemgr.html')"><i class="fa fa-at"></i>缓存刷新</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -279,15 +282,16 @@
 	<!-- jQuery 2.2.0 -->
 	<script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
 	<script src="plugins/jQuery/jquery.cookie.js"></script>
+	<script src="plugins/jQuery/jquery.qrcode.min.js"></script>
 	<!-- Bootstrap 3.3.6 -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<!-- DataTables -->
-	<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
+	<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<!-- Slimscroll -->
 	<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 	<!-- FastClick -->
-	<script src="../../plugins/fastclick/fastclick.js"></script>
+	<script src="plugins/fastclick/fastclick.js"></script>
 	<!-- AdminLTE App -->
 	<script src="dist/js/app.min.js"></script>
 	<!-- AdminLTE for demo purposes -->

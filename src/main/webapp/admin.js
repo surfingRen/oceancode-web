@@ -9,10 +9,19 @@ $(function() {
 	else
 		load('admin.index.html');
 })
-
-function load(url) {
-	$.cookie('oceancode_admin_lastPage', url);
-	$('.content-wrapper').html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+function loading(){
+	$('#content-wrapper').show();
+}
+function cancelLoading(){
+	$('#content-wrapper').hide();
+}
+function load(url,contr) {
+	cancelLoading();
+	if(!contr){
+		contr = '.content-wrapper';
+		$.cookie('oceancode_admin_lastPage', url);
+	}
+	$(contr).html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
 	$.ajax({
 		url : 'rs/oc/loadHtml?path=' + url,
 		type : 'GET',
@@ -23,7 +32,7 @@ function load(url) {
 				window.location.href = 'login.html';
 				return;
 			}
-			$('.content-wrapper').html(h);
+			$(contr).html(h);
 		}
 	});
 	return false;

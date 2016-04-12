@@ -30,6 +30,8 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import cn.com.oceancode.utils.DownloadImage;
+
 public class DBInit {
 
 	static JdbcTemplate jdbcTemplate = null;
@@ -47,13 +49,13 @@ public class DBInit {
 	}
 
 	public static void main(String[] args2) throws ClientProtocolException, IOException, JSONException {
-
+		downloadImgs();
 //		for (int i = 0; i < 10; i++) {
 //			Thread t = new Thread(new Work());
 //			t.start();
 //		}
 //		 pullShopInfoFromBaiduWaimai();
-		 pullDetailFromBaiduWaimai();
+//		 pullDetailFromBaiduWaimai();
 	}
 
 	public static void pullShopInfoFromBaiduWaimai() {
@@ -324,4 +326,32 @@ public class DBInit {
 
 	}
 
+	public static void downloadImgs(){
+		try {
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			String sql = "select photos from t_stuff";
+			List<Map<String, Object>> list = template.queryForList(sql, paramMap);
+			System.out.println(list.size());
+			int i = 0;
+			for (Map<String, Object> map : list) {
+				try {
+					i += 1;
+					System.out.print(i+" :");
+					String replace = ((String) map.get("photos")).replace("background: url(","").replace(") center center no-repeat;background-size:cover;-webkit-background-size:cover;-o-background-size:cover;-moz-background-size:cover;-ms-background-size:cover;","");
+					String replace2 = ((String) map.get("photos")).replace("background: url(http://img.waimai.bdimg.com/pb/","").replace(",w_172,h_172,q_100) center center no-repeat;background-size:cover;-webkit-background-size:cover;-o-background-size:cover;-moz-background-size:cover;-ms-background-size:cover;","");
+					System.out.println(map);
+					if(map.get("photos")==null||map.get("photos").equals("")){
+						continue;
+					}
+					DownloadImage.download(replace, replace2, "/Users/surfingRen/oceancodeImgs");
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
+					continue;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

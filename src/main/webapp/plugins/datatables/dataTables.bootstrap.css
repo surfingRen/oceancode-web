@@ -55,6 +55,9 @@ div.dataTables_paginate ul.pagination {
 	}
 }
 
+table.dataTable tbody tr.selected {
+  background-color: #B9B9B9;
+}
 
 table.dataTable td,
 table.dataTable th {
